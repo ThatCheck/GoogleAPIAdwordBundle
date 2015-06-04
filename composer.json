@@ -1,0 +1,33 @@
+{
+    "name" : "thatcheck/GoogleAPIAdwordBundle",
+    "description" : "provide use for symfony of the GoogleAPIAdword ",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Florian Cabirol",
+        "email" : "cabirol.florian.pro@gmail.com"
+    }],
+    "keywords" : [
+        "Google",
+        "Adword",
+        "API"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+        "googleads/googleads-php-lib": "dev-master"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "~2.6"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Thatcheck\\Bundle\\GoogleAPIAdwordBundle\\" : ""
+        }
+    },
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "master"
+        }
+    }
+}
