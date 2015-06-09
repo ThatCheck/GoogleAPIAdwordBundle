@@ -1,3 +1,3 @@
-thatcheck_google_api_adword_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: ThatcheckGoogleAPIAdwordBundle:Default:index }
+thatcheck_google_api_adword_redirect:
+    path:     /redirect
+    defaults: { _controller: ThatcheckGoogleAPIAdwordBundle:Redirect:redirect }

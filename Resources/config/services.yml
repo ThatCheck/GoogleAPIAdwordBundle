@@ -1,4 +1,16 @@
 services:
-#    thatcheck_google_api_adword.example:
-#        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    thatcheck_google_api_adword.client:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordClient
+        arguments: [%thatcheck_google_api_adword.oauth2_client_id%,%thatcheck_google_api_adword.oauth2_client_secret%,%thatcheck_google_api_adword.oauth2_refresh_token%,%thatcheck_google_api_adword.developer_key%,%thatcheck_google_api_adword.user_agent%, %thatcheck_google_api_adword.client_customer_id%, %thatcheck_google_api_adword.path_oauth2_credential%]
+
+    thatcheck_google_api_adword.campaign:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordCampaignService
+        arguments: [@thatcheck_google_api_adword.client]
+
+    thatcheck_google_api_adword.account_management:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAccountManagement
+        arguments: [@thatcheck_google_api_adword.client]
+
+    thatcheck_google_api_adword.report:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordReportService
+        arguments: [@thatcheck_google_api_adword.client]
