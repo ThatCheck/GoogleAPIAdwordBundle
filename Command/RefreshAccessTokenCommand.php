@@ -23,10 +23,12 @@ class RefreshAccessTokenCommand extends \Symfony\Bundle\FrameworkBundle\Command\
 
     protected function execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output)
     {
-        /*
-         * @var GoogleAPIAdwordClient
+        /**
+         * @var GoogleAPIAdwordClient $client
          */
         $client = $this->getContainer()->get('thatcheck_google_api_adword.client');
-        $client->getAdwordUser()->GetOAuth2Handler()->RefreshAccessToken($client->getAdwordUser()->GetOAuth2Info());
+        $refreshToken = $client->getAdwordUser()->GetOAuth2Handler()->RefreshAccessToken($client->getAdwordUser()->GetOAuth2Info());
+        $fs = new \Symfony\Component\Filesystem\Filesystem();
+        $fs->dumpFile($this->getContainer()->getParameter('thatcheck_google_api_adword.path_oauth2_credential'), json_encode($refreshToken));
     }
 }
