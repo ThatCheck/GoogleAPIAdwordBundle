@@ -14,3 +14,11 @@ services:
     thatcheck_google_api_adword.report:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordReportService
         arguments: [@thatcheck_google_api_adword.client]
+
+    thatcheck_google_api_adword.adgroup:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAdGroupService
+        arguments: [@thatcheck_google_api_adword.client]
+
+    thatcheck_google_api_adword.adgroupad:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAdGroupAdService
+        arguments: [@thatcheck_google_api_adword.client]
