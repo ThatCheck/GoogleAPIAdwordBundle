@@ -16,8 +16,23 @@ class GoogleAPIAdwordClient
      */
     private $adwordUser;
 
+    /**
+     * @var bool
+     */
+    private $validateOnly;
+
+    /**
+     * @param $client_id
+     * @param $client_secret
+     * @param $refresh_token
+     * @param $developper_token
+     * @param $user_agent
+     * @param $client_customer_id
+     * @param $pathToOauthCredentials
+     */
     public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials)
     {
+        $this->validateOnly = false;
         $oauth2Info = array(
             'client_id' => $client_id,
             'client_secret' => $client_secret,
@@ -31,6 +46,22 @@ class GoogleAPIAdwordClient
         // See AdWordsUser constructor
         $this->adwordUser = new \AdWordsUser(null, $developper_token, $user_agent, $client_customer_id, null, $oauth2Info);
         $this->adwordUser->LogAll();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValidateOnly()
+    {
+        return $this->validateOnly;
+    }
+
+    /**
+     * @param bool $validateOnly
+     */
+    public function setValidateOnly($validateOnly)
+    {
+        $this->validateOnly = $validateOnly;
     }
 
     /**

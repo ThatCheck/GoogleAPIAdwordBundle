@@ -23,7 +23,7 @@ class GetTokenCommand extends \Symfony\Bundle\FrameworkBundle\Command\ContainerA
     {
         $oauth2Info = array(
             'client_id' => $this->getContainer()->getParameter('thatcheck_google_api_adword.oauth2_client_id'),
-            'client_secret' => $this->getContainer()->getParameter('thatcheck_google_api_adword.oauth2_client_secret')
+            'client_secret' => $this->getContainer()->getParameter('thatcheck_google_api_adword.oauth2_client_secret'),
         );
         $user = new \AdWordsUser(null, null, null, null, null, $oauth2Info);
         $user->LogAll();

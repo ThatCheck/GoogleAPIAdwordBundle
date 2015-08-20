@@ -9,27 +9,21 @@
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
-class GoogleAPIAdwordCampaignService
+class GoogleAPIAdwordCampaignService extends AbstractServiceManagement
 {
-    /**
-     * @var GoogleAPIAdwordClient
-     */
-    private $client;
-
     /**
      * @param $client
      */
     public function __construct($client)
     {
-        $this->client = $client;
+        parent::__construct($client);
     }
-
     /**
      * @return \SoapClient
      */
     public function getCampaignService()
     {
-        return $this->client->getAdwordUser()->GetService('CampaignService');
+        return $this->getService('CampaignService');
     }
 
     /**

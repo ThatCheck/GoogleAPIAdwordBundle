@@ -1,30 +1,25 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: admin_000
  * Date: 20/07/2015
- * Time: 16:48
+ * Time: 16:48.
  */
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
 /**
- * Class GoogleAPIAdwordAdGroupAdService
- * @package Thatcheck\Bundle\GoogleAPIAdwordBundle\Services
+ * Class GoogleAPIAdwordAdGroupAdService.
  */
-class GoogleAPIAdwordAdGroupAdService {
-
-    /**
-     * @var GoogleAPIAdwordClient
-     */
-    private $client;
-
+class GoogleAPIAdwordAdGroupAdService extends AbstractServiceManagement
+{
     /**
      * @param $client
      */
     public function __construct($client)
     {
-        $this->client = $client;
+        parent::__construct($client);
     }
 
     /**
@@ -32,14 +27,15 @@ class GoogleAPIAdwordAdGroupAdService {
      */
     public function getAdGroupAdService()
     {
-        return $this->client->getAdwordUser()->GetService('AdGroupAdService');
+        return $this->getService('AdGroupAdService');
     }
 
     /** Get all addgroupId for a specific campaign
      * @param $campaign
+     *
      * @return array
      */
-    public function getAllAdForAdGroup(array $adGroupId )
+    public function getAllAdForAdGroup(array $adGroupId)
     {
         $adGroupAdService = $this->getAdGroupAdService();
         $selector = new \Selector();
@@ -47,7 +43,7 @@ class GoogleAPIAdwordAdGroupAdService {
         $selector->ordering[] = new \OrderBy('Headline', 'ASCENDING');
 
         // Create predicates.
-        $selector->predicates[] = new \Predicate('AdGroupId', 'IN', array($adGroupId));;
+        $selector->predicates[] = new \Predicate('AdGroupId', 'IN', array($adGroupId));
         // By default disabled ads aren't returned by the selector. To return them
         // include the DISABLED status in a predicate.
         $selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('DISABLED', 'PAUSED'));
@@ -64,8 +60,9 @@ class GoogleAPIAdwordAdGroupAdService {
             if (isset($page->entries)) {
                 foreach ($page->entries as $adGroupAd) {
                     $cr = 0;
-                    if($adGroupAd->stats->clicks > 0)
+                    if ($adGroupAd->stats->clicks > 0) {
                         $cr = $adGroupAd->stats->conversions / $adGroupAd->stats->clicks;
+                    }
 
                     $ret[] = array(
                         'headline' => $adGroupAd->ad->headline,
@@ -74,7 +71,7 @@ class GoogleAPIAdwordAdGroupAdService {
                         'textrow2' => $adGroupAd->ad->description2,
                         'view_url' => $adGroupAd->ad->displayUrl,
                         'target_url' => $adGroupAd->ad->url,
-                        'active' => (strcmp($adGroupAd->status,'ENABLED')==0)?1:0,
+                        'active' => (strcmp($adGroupAd->status, 'ENABLED') == 0) ? 1 : 0,
                         'clicks' => $adGroupAd->stats->clicks,
                         'cpc' => $adGroupAd->stats->averageCpc->microAmount / 1000000,
                         'conversions' => $adGroupAd->stats->conversions,
@@ -82,7 +79,7 @@ class GoogleAPIAdwordAdGroupAdService {
                         'ctr' => $adGroupAd->stats->ctr,
                         'impressions' => $adGroupAd->stats->impressions,
                         'cr' => $cr,
-                        'position' => $adGroupAd->stats->averagePosition
+                        'position' => $adGroupAd->stats->averagePosition,
                     );
                 }
             } else {
@@ -92,6 +89,7 @@ class GoogleAPIAdwordAdGroupAdService {
             // Advance the paging index.
             $selector->paging->startIndex += \AdWordsConstants::RECOMMENDED_PAGE_SIZE;
         } while ($page->totalNumEntries > $selector->paging->startIndex);
+
         return $ret;
     }
-} 
+}

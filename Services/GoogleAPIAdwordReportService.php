@@ -9,24 +9,19 @@
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
-class GoogleAPIAdwordReportService
+class GoogleAPIAdwordReportService extends AbstractServiceManagement
 {
-    /**
-     * @var GoogleAPIAdwordClient
-     */
-    private $client;
-
     /**
      * @param $client
      */
     public function __construct($client)
     {
-        $this->client = $client;
+        parent::__construct($client);
     }
 
     public function getReportService()
     {
-        return $this->client->getAdwordUser()->GetService('ReportDefinitionService');
+        return $this->getService('ReportDefinitionService');
     }
 
     public function getReport($clientId, \ReportDefinition $reportDefinition, array $options)

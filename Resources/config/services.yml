@@ -3,6 +3,10 @@ services:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordClient
         arguments: [%thatcheck_google_api_adword.oauth2_client_id%,%thatcheck_google_api_adword.oauth2_client_secret%,%thatcheck_google_api_adword.oauth2_refresh_token%,%thatcheck_google_api_adword.developer_key%,%thatcheck_google_api_adword.user_agent%, %thatcheck_google_api_adword.client_customer_id%, %thatcheck_google_api_adword.path_oauth2_credential%]
 
+    thatcheck_google_api_adword.adwordGroupCriterionService:
+        class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAdGroupCriterionService
+        arguments: [@thatcheck_google_api_adword.client]
+
     thatcheck_google_api_adword.campaign:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordCampaignService
         arguments: [@thatcheck_google_api_adword.client]

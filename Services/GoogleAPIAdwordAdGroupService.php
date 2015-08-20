@@ -1,31 +1,25 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: admin_000
  * Date: 20/07/2015
- * Time: 16:43
+ * Time: 16:43.
  */
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
-
 /**
- * Class GoogleAPIAdwordAdGroupService
- * @package Thatcheck\Bundle\GoogleAPIAdwordBundle\Services
+ * Class GoogleAPIAdwordAdGroupService.
  */
-class GoogleAPIAdwordAdGroupService {
-
-    /**
-     * @var GoogleAPIAdwordClient
-     */
-    private $client;
-
+class GoogleAPIAdwordAdGroupService extends AbstractServiceManagement
+{
     /**
      * @param $client
      */
     public function __construct($client)
     {
-        $this->client = $client;
+        parent::__construct($client);
     }
 
     /**
@@ -33,11 +27,12 @@ class GoogleAPIAdwordAdGroupService {
      */
     public function getAdGroupService()
     {
-        return $this->client->getAdwordUser()->GetService('AdGroupService');
+        return $this->getService('AdGroupService');
     }
 
     /** Get all addgroupId for a specific campaign
      * @param $campaign
+     *
      * @return array
      */
     public function getAllAdGroupIdForCampaign($campaign)
@@ -67,7 +62,7 @@ class GoogleAPIAdwordAdGroupService {
                         'name' => $adgroup->name,
                         'id' => $adgroup->id,
                         'campaignId' => $adgroup->campaignId,
-                        'active' => (strcmp($adgroup->status,'ENABLED')==0)?1:0
+                        'active' => (strcmp($adgroup->status, 'ENABLED') == 0) ? 1 : 0,
                     );
                 }
             } else {
@@ -79,4 +74,4 @@ class GoogleAPIAdwordAdGroupService {
 
         return $ret;
     }
-} 
+}

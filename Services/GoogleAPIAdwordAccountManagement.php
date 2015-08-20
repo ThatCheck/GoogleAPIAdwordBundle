@@ -9,24 +9,22 @@
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
-class GoogleAPIAdwordAccountManagement
+/**
+ * Class GoogleAPIAdwordAccountManagement.
+ */
+class GoogleAPIAdwordAccountManagement extends AbstractServiceManagement
 {
-    /**
-     * @var GoogleAPIAdwordClient
-     */
-    private $client;
-
     /**
      * @param $client
      */
     public function __construct($client)
     {
-        $this->client = $client;
+        parent::__construct($client);
     }
 
     public function getManagedCustomerService()
     {
-        return $this->client->getAdwordUser()->GetService('ManagedCustomerService');
+        return $this->getService('ManagedCustomerService');
     }
 
     public function getAccountHierarchy($selector)
