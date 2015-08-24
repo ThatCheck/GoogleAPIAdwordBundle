@@ -23,7 +23,7 @@ class RefreshAccessTokenCommand extends \Symfony\Bundle\FrameworkBundle\Command\
 
     protected function execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output)
     {
-        /**
+        /*
          * @var GoogleAPIAdwordClient
          */
         $client = $this->getContainer()->get('thatcheck_google_api_adword.client');

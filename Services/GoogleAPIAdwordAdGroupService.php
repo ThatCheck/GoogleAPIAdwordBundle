@@ -39,11 +39,10 @@ class GoogleAPIAdwordAdGroupService extends AbstractServiceManagement
     {
         $adgroupService = $this->getAdGroupService();
         $selector = new \Selector();
-        $selector->fields = array('Id', 'Name', 'CampaignId', 'Status');
+        $selector->fields = array('Id', 'Name', 'CampaignId', 'CampaignName', 'Status', 'Settings', 'Labels','TrackingUrlTemplate');
         $selector->ordering[] = new \OrderBy('CampaignId', 'ASCENDING');
 
         // Filter out deleted criteria.
-        $selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('DELETED', 'PAUSED'));
         $selector->predicates[] = new \Predicate('CampaignId', 'IN', array($campaign));
         // Create paging controls.
         $selector->paging = new \Paging(0, \AdWordsConstants::RECOMMENDED_PAGE_SIZE);
@@ -58,12 +57,7 @@ class GoogleAPIAdwordAdGroupService extends AbstractServiceManagement
                 foreach ($page->entries as $adgroup) {
                     //printf("AdGroup with name '%s' and id '%s' was found for Campaign: '%s' and Status: '%s'\n",
                     // $adgroup->name, $adgroup->id, $adgroup->campaignId, $adgroup->status);
-                    $ret[] = array(
-                        'name' => $adgroup->name,
-                        'id' => $adgroup->id,
-                        'campaignId' => $adgroup->campaignId,
-                        'active' => (strcmp($adgroup->status, 'ENABLED') == 0) ? 1 : 0,
-                    );
+                    $ret[] = $adgroup;
                 }
             } else {
                 //print "No adgroups were found.\n";
