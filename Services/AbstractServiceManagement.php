@@ -44,4 +44,19 @@ abstract class AbstractServiceManagement
     {
         return $this->client;
     }
+
+
+    /**
+     * Set the customer-id.
+     *
+     * @param $id
+     *
+     * @return $this
+     */
+    public function setCustomerId($id)
+    {
+        $this->client->getAdwordUser()->SetClientCustomerId($id);
+
+        return $this;
+    }
 }

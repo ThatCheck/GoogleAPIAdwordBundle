@@ -54,17 +54,4 @@ class GoogleAPIAdwordCampaignService extends AbstractServiceManagement
         return $campaignArray;
     }
 
-    /**
-     * Set the customer-id.
-     *
-     * @param $id
-     *
-     * @return $this
-     */
-    public function setCustomerId($id)
-    {
-        $this->client->getAdwordUser()->SetClientCustomerId($id);
-
-        return $this;
-    }
 }
