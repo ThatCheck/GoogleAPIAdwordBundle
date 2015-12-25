@@ -38,6 +38,11 @@ class ThatcheckGoogleAPIAdwordExtension extends Extension
         $container->setParameter('thatcheck_google_api_adword.developer_key', $config['developer_key']);
         $container->setParameter('thatcheck_google_api_adword.redirect_uri', $config['redirect_uri']);
         $container->setParameter('thatcheck_google_api_adword.client_customer_id', $config['client_customer_id']);
+        if (array_key_exists('log_all', $config)) {
+            $container->setParameter('thatcheck_google_api_adword.log_all', $config['log_all']);
+        } else {
+            $container->setParameter('thatcheck_google_api_adword.log_all', false);
+        }
 
         if (array_key_exists('path_oauth2_credential', $config)) {
             $container->setParameter('thatcheck_google_api_adword.path_oauth2_credential', $config['path_oauth2_credential']);

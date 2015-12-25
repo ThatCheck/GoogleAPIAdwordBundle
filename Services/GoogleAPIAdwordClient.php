@@ -6,7 +6,6 @@
  * Date: 05/06/2015
  * Time: 09:19.
  */
-
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
 class GoogleAPIAdwordClient
@@ -22,6 +21,8 @@ class GoogleAPIAdwordClient
     private $validateOnly;
 
     /**
+     * GoogleAPIAdwordClient constructor.
+     *
      * @param $client_id
      * @param $client_secret
      * @param $refresh_token
@@ -29,8 +30,9 @@ class GoogleAPIAdwordClient
      * @param $user_agent
      * @param $client_customer_id
      * @param $pathToOauthCredentials
+     * @param bool|false $logAll
      */
-    public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials)
+    public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials, $logAll = false)
     {
         $this->validateOnly = false;
         $oauth2Info = array(
@@ -45,7 +47,11 @@ class GoogleAPIAdwordClient
         }
         // See AdWordsUser constructor
         $this->adwordUser = new \AdWordsUser(null, $developper_token, $user_agent, $client_customer_id, null, $oauth2Info);
-        $this->adwordUser->LogAll();
+        if ($logAll === true) {
+            $this->adwordUser->LogAll();
+        } else {
+            $this->adwordUser->LogErrors();
+        }
     }
 
     /**

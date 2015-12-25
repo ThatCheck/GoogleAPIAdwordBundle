@@ -38,7 +38,7 @@ abstract class AbstractServiceManagement
     }
 
     /**
-     * @param $validate
+     * Get client
      */
     public function getClient()
     {
