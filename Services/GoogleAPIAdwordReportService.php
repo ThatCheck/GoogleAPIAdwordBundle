@@ -8,7 +8,14 @@
  */
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
+use Google\AdsApi\AdWords\ReportSettingsBuilder;
+use Google\AdsApi\AdWords\v201601\cm\Selector;
+use Google\AdsApi\Dfp\Util\v201511\ReportDownloader;
 
+/**
+ * Class GoogleAPIAdwordReportService
+ * @package Thatcheck\Bundle\GoogleAPIAdwordBundle\Services
+ */
 class GoogleAPIAdwordReportService extends AbstractServiceManagement
 {
     /**
@@ -19,15 +26,15 @@ class GoogleAPIAdwordReportService extends AbstractServiceManagement
         parent::__construct($client);
     }
 
-    public function getReportService()
+    /**
+     * @param $clientId
+     * @param Selector $selector
+     * @return mixed
+     */
+    public function getReport($clientId, Selector $selector)
     {
-        return $this->getService('ReportDefinitionService');
-    }
-
-    public function getReport($clientId, \ReportDefinition $reportDefinition, array $options)
-    {
-        $this->client->getAdwordUser()->SetClientCustomerId($clientId);
-
-        return \ReportUtils::DownloadReport($reportDefinition, null, $this->client->getAdwordUser(), $options);
+        $session = $this->client->getAdWordsSessionBuilder()->withClientCustomerId($clientId)->build();
+        $reportDownloaderService = $this->client->getAdWordsServices()->get($session, 'ReportDefinitionService', 'v201601', 'cm');
+        return $reportDownloaderService->get($selector);
     }
 }

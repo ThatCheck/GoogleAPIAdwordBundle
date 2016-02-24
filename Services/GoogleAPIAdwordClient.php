@@ -8,12 +8,29 @@
  */
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
+use Google\AdsApi\AdWords\AdWordsServices;
+use Google\AdsApi\AdWords\AdWordsSessionBuilder;
+use Google\AdsApi\AdWords\ReportSettingsBuilder;
+use Google\AdsApi\Common\Util\SimpleGoogleCredential;
+
+/**
+ * Class GoogleAPIAdwordClient
+ * @package Thatcheck\Bundle\GoogleAPIAdwordBundle\Services
+ */
 class GoogleAPIAdwordClient
 {
     /**
-     * @var \AdWordsUser
+     * @var SimpleGoogleCredential
      */
-    private $adwordUser;
+    private $simpleGoogleCredential;
+    /**
+     * @var AdWordsSessionBuilder
+     */
+    private $adWordsSessionBuilder;
+    /**
+     * @var AdWordsServices
+     */
+    private $adWordsServices;
 
     /**
      * @var bool
@@ -22,36 +39,21 @@ class GoogleAPIAdwordClient
 
     /**
      * GoogleAPIAdwordClient constructor.
-     *
-     * @param $client_id
-     * @param $client_secret
-     * @param $refresh_token
-     * @param $developper_token
-     * @param $user_agent
-     * @param $client_customer_id
      * @param $pathToOauthCredentials
      * @param bool|false $logAll
      */
-    public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials, $logAll = false)
+    public function __construct($pathToOauthCredentials, $logAll = false)
     {
         $this->validateOnly = false;
-        $oauth2Info = array(
-            'client_id' => $client_id,
-            'client_secret' => $client_secret,
-            'refresh_token' => $refresh_token,
-        );
+        $this->simpleGoogleCredential = new SimpleGoogleCredential();
+        $this->simpleGoogleCredential->fromFile($pathToOauthCredentials);
 
-        if (is_file($pathToOauthCredentials)) {
-            $data = file_get_contents($pathToOauthCredentials);
-            $oauth2Info = json_decode($data, true);
-        }
-        // See AdWordsUser constructor
-        $this->adwordUser = new \AdWordsUser(null, $developper_token, $user_agent, $client_customer_id, null, $oauth2Info);
-        if ($logAll === true) {
-            $this->adwordUser->LogAll();
-        } else {
-            $this->adwordUser->LogErrors();
-        }
+        $this->adWordsSessionBuilder = new AdWordsSessionBuilder();
+        $this->adWordsSessionBuilder = $this->adWordsSessionBuilder->fromFile($pathToOauthCredentials)
+            ->withOAuth2Credential($this->simpleGoogleCredential)
+            ->build();
+
+        $this->adWordsServices = new AdWordsServices();
     }
 
     /**
@@ -71,10 +73,69 @@ class GoogleAPIAdwordClient
     }
 
     /**
-     * @return \AdWordsUser
+     * @return SimpleGoogleCredential
      */
-    public function getAdwordUser()
+    public function getSimpleGoogleCredential()
     {
-        return $this->adwordUser;
+        return $this->simpleGoogleCredential;
     }
+
+    /**
+     * @param SimpleGoogleCredential $simpleGoogleCredential
+     */
+    public function setSimpleGoogleCredential($simpleGoogleCredential)
+    {
+        $this->simpleGoogleCredential = $simpleGoogleCredential;
+    }
+
+    /**
+     * @return AdWordsSessionBuilder
+     */
+    public function getAdWordsSessionBuilder()
+    {
+        return $this->adWordsSessionBuilder;
+    }
+
+    /**
+     * @param AdWordsSessionBuilder $adWordsSessionBuilder
+     */
+    public function setAdWordsSessionBuilder($adWordsSessionBuilder)
+    {
+        $this->adWordsSessionBuilder = $adWordsSessionBuilder;
+    }
+
+    /**
+     * @return AdWordsServices
+     */
+    public function getAdWordsServices()
+    {
+        return $this->adWordsServices;
+    }
+
+    /**
+     * @param AdWordsServices $adWordsServices
+     */
+    public function setAdWordsServices($adWordsServices)
+    {
+        $this->adWordsServices = $adWordsServices;
+    }
+
+    /**
+     * @return \Google\AdsApi\AdWords\ReportSettings|mixed
+     */
+    public function getReportSettingsBuilder()
+    {
+        return $this->reportSettingsBuilder;
+    }
+
+    /**
+     * @param \Google\AdsApi\AdWords\ReportSettings|mixed $reportSettingsBuilder
+     */
+    public function setReportSettingsBuilder($reportSettingsBuilder)
+    {
+        $this->reportSettingsBuilder = $reportSettingsBuilder;
+    }
+
+
+
 }
