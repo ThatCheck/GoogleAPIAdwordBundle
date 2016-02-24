@@ -15,7 +15,7 @@
         "MIT"
     ],
     "require" : {
-        "googleads/googleads-php-lib": "dev-experimental as 1.0"
+        "googleads/googleads-php-lib": "dev-experimental"
     },
     "require-dev": {
         "symfony/var-dumper": "~2.6"
