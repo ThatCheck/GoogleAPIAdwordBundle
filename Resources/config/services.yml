@@ -5,24 +5,24 @@ services:
 
     thatcheck_google_api_adword.adwordGroupCriterionService:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAdGroupCriterionService
-        arguments: [@thatcheck_google_api_adword.client]
+        arguments: ["@thatcheck_google_api_adword.client"]
 
     thatcheck_google_api_adword.campaign:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordCampaignService
-        arguments: [@thatcheck_google_api_adword.client]
+        arguments: ["@thatcheck_google_api_adword.client"]
 
     thatcheck_google_api_adword.account_management:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAccountManagement
-        arguments: [@thatcheck_google_api_adword.client]
+        arguments: ["@thatcheck_google_api_adword.client"]
 
     thatcheck_google_api_adword.report:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordReportService
-        arguments: [@thatcheck_google_api_adword.client]
+        arguments: ["@thatcheck_google_api_adword.client"]
 
     thatcheck_google_api_adword.adgroup:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAdGroupService
-        arguments: [@thatcheck_google_api_adword.client]
+        arguments: ["@thatcheck_google_api_adword.client"]
 
     thatcheck_google_api_adword.adgroupad:
         class: Thatcheck\Bundle\GoogleAPIAdwordBundle\Services\GoogleAPIAdwordAdGroupAdService
-        arguments: [@thatcheck_google_api_adword.client]
+        arguments: ["@thatcheck_google_api_adword.client"]
