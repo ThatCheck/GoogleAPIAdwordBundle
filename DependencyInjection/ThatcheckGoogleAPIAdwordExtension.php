@@ -50,6 +50,12 @@ class ThatcheckGoogleAPIAdwordExtension extends Extension
             $container->setParameter('thatcheck_google_api_adword.path_oauth2_credential', __DIR__.'/oaut2_credentials/credentials.json');
         }
 
+        if (array_key_exists('path_settings_ini', $config)) {
+            $container->setParameter('thatcheck_google_api_adword.path_settings_ini', $config['path_settings_ini']);
+        } else {
+            $container->setParameter('thatcheck_google_api_adword.path_settings_ini', null);
+        }
+
         $fs = new \Symfony\Component\Filesystem\Filesystem();
         $folder = $container->getParameter('thatcheck_google_api_adword.path_oauth2_credential');
         if (is_dir($folder)) {

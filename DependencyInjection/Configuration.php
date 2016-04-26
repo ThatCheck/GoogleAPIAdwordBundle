@@ -30,6 +30,8 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('developer_key')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('client_customer_id')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('path_oauth2_credential')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('path_settings_ini')->end()
+            ->scalarNode('log_all')->end()
             ->end();
 
         // Here you should define the parameters that are allowed to

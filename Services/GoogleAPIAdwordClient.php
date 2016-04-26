@@ -32,7 +32,7 @@ class GoogleAPIAdwordClient
      * @param $pathToOauthCredentials
      * @param bool|false $logAll
      */
-    public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials, $logAll = false)
+    public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials, $logAll, $pathSettings)
     {
         $this->validateOnly = false;
         $oauth2Info = array(
@@ -46,7 +46,7 @@ class GoogleAPIAdwordClient
             $oauth2Info = json_decode($data, true);
         }
         // See AdWordsUser constructor
-        $this->adwordUser = new \AdWordsUser(null, $developper_token, $user_agent, $client_customer_id, null, $oauth2Info);
+        $this->adwordUser = new \AdWordsUser(null, $developper_token, $user_agent, $client_customer_id, $pathSettings, $oauth2Info);
         if ($logAll === true) {
             $this->adwordUser->LogAll();
         } else {
