@@ -8,6 +8,9 @@
  */
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
+use Google\AdsApi\AdWords\v201609\mcm\ManagedCustomerPage;
+use Google\AdsApi\AdWords\v201609\mcm\ManagedCustomerService;
+use Google\AdsApi\Common\AdsSoapClient;
 
 /**
  * Class GoogleAPIAdwordAccountManagement.
@@ -22,11 +25,18 @@ class GoogleAPIAdwordAccountManagement extends AbstractServiceManagement
         parent::__construct($client);
     }
 
+    /**
+     * @return AdsSoapClient
+     */
     public function getManagedCustomerService()
     {
-        return $this->getService('ManagedCustomerService');
+        return $this->getService(ManagedCustomerService::class);
     }
 
+    /**
+     * @param $selector
+     * @return ManagedCustomerPage
+     */
     public function getAccountHierarchy($selector)
     {
         $managedCustomerService = $this->getManagedCustomerService();

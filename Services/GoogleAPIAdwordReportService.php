@@ -9,6 +9,14 @@
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
+use Google\AdsApi\AdWords\Reporting\v201609\ReportDefinition;
+use Google\AdsApi\AdWords\Reporting\v201609\ReportDownloader;
+use Thatcheck\Bundle\GoogleAPIAdwordBundle\Request\CustomRequestOptionFactory;
+
+/**
+ * Class GoogleAPIAdwordReportService
+ * @package Thatcheck\Bundle\GoogleAPIAdwordBundle\Services
+ */
 class GoogleAPIAdwordReportService extends AbstractServiceManagement
 {
     /**
@@ -19,15 +27,28 @@ class GoogleAPIAdwordReportService extends AbstractServiceManagement
         parent::__construct($client);
     }
 
+    /**
+     * @return \Google\AdsApi\Common\AdsSoapClient
+     */
     public function getReportService()
     {
         return $this->getService('ReportDefinitionService');
     }
 
-    public function getReport($clientId, \ReportDefinition $reportDefinition, array $options)
+    /**
+     * Get an adwords reports∂
+     * @param $clientId
+     * @param ReportDefinition $reportDefinition
+     * @param array $options
+     * @return string
+     */
+    public function getReport($clientId, ReportDefinition $reportDefinition, $options = array())
     {
-        $this->client->getAdwordUser()->SetClientCustomerId($clientId);
-
-        return \ReportUtils::DownloadReport($reportDefinition, null, $this->client->getAdwordUser(), $options);
+        if(!empty($options)){
+            CustomRequestOptionFactory::buildRequestOptionsFactory($this->getClient()->getSessionBuilder(), $options);
+        }
+        $this->getClient()->buildWithId($clientId);
+        $reportDownloader = new ReportDownloader($this->getClient()->getSession());
+        return $reportDownloader->downloadReport($reportDefinition)->getAsString();
     }
 }

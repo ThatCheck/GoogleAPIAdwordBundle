@@ -41,6 +41,7 @@ class GoogleAPIAdwordAdGroupCriterionService extends AbstractServiceManagement
 
     /**
      * @param \AdGroupCriterion $criterion
+     * @param $operator
      */
     public function createAndAdd(\AdGroupCriterion $criterion, $operator)
     {

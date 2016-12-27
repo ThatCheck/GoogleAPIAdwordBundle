@@ -8,6 +8,8 @@
  */
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
+use Google\AdsApi\AdWords\AdWordsServices;
+use Google\AdsApi\Common\AdsSoapClient;
 
 /**
  * Class AbstarctServiceManagement.
@@ -28,13 +30,15 @@ abstract class AbstractServiceManagement
     }
 
     /**
-     * @param $name
+     * @param string $className
      *
-     * @return \SoapClient
+     * @return AdsSoapClient
      */
-    public function getService($name)
+    public function getService($className)
     {
-        return $this->client->getAdwordUser()->GetService($name, null, null, null, $this->client->isValidateOnly(), null);
+        $adwordsServices = new AdWordsServices();
+
+        return $adwordsServices->get($this->client->getSession(), $className);
     }
 
     /**
@@ -45,7 +49,6 @@ abstract class AbstractServiceManagement
         return $this->client;
     }
 
-
     /**
      * Set the customer-id.
      *
@@ -55,8 +58,7 @@ abstract class AbstractServiceManagement
      */
     public function setCustomerId($id)
     {
-        $this->client->getAdwordUser()->SetClientCustomerId($id);
-
+        $this->client->buildWithId($id);
         return $this;
     }
 }

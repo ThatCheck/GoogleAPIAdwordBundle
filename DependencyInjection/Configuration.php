@@ -22,16 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('oauth2_client_id')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('oauth2_client_secret')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('redirect_uri')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('oauth2_refresh_token')->end()
-            ->scalarNode('user_agent')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('developer_key')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('client_customer_id')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('path_oauth2_credential')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('path_settings_ini')->end()
-            ->scalarNode('log_all')->end()
+            ->scalarNode('config_file')->isRequired()->cannotBeEmpty()->end()
             ->end();
 
         // Here you should define the parameters that are allowed to

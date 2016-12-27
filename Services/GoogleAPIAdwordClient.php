@@ -8,73 +8,95 @@
  */
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
+use Google\AdsApi\AdWords\AdWordsSession;
+use Google\AdsApi\AdWords\AdWordsSessionBuilder;
+use Google\AdsApi\Common\OAuth2TokenBuilder;
+use Psr\Log\LoggerInterface;
+
 class GoogleAPIAdwordClient
 {
-    /**
-     * @var \AdWordsUser
-     */
-    private $adwordUser;
 
     /**
-     * @var bool
+     * @var AdWordsSession
      */
-    private $validateOnly;
+    private $session;
+
+    /**
+     * @var AdWordsSessionBuilder
+     */
+    private $sessionBuilder;
+
+    /**
+     * @var string
+     */
+    private $configFile;
+
+    /**
+     * @var string
+     */
+    private $oauthCredentials;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * GoogleAPIAdwordClient constructor.
-     *
-     * @param $client_id
-     * @param $client_secret
-     * @param $refresh_token
-     * @param $developper_token
-     * @param $user_agent
-     * @param $client_customer_id
-     * @param $pathToOauthCredentials
-     * @param bool|false $logAll
+     * @param $configFile
+     * @param LoggerInterface $logger
      */
-    public function __construct($client_id, $client_secret, $refresh_token, $developper_token, $user_agent, $client_customer_id, $pathToOauthCredentials, $logAll, $pathSettings)
+    public function __construct($configFile, LoggerInterface $logger)
     {
-        $this->validateOnly = false;
-        $oauth2Info = array(
-            'client_id' => $client_id,
-            'client_secret' => $client_secret,
-            'refresh_token' => $refresh_token,
-        );
+        $this->configFile = $configFile;
+        $this->logger = $logger;
+        $this->oauthCredentials = (new OAuth2TokenBuilder())->fromFile($configFile)->build();
+        $this->buildSession();
+    }
 
-        if (is_file($pathToOauthCredentials)) {
-            $data = file_get_contents($pathToOauthCredentials);
-            $oauth2Info = json_decode($data, true);
+    /**
+     * @param null $id
+     * @return $this
+     */
+    public function buildWithId($id = null)
+    {
+        if($id !== null){
+            $this->sessionBuilder = $this->sessionBuilder->withClientCustomerId($id);
         }
-        // See AdWordsUser constructor
-        $this->adwordUser = new \AdWordsUser(null, $developper_token, $user_agent, $client_customer_id, $pathSettings, $oauth2Info);
-        if ($logAll === true) {
-            $this->adwordUser->LogAll();
-        } else {
-            $this->adwordUser->LogErrors();
-        }
+
+        $this->session = $this->sessionBuilder->build();
+        return $this;
     }
 
     /**
-     * @return bool
+     * @return AdWordsSession
      */
-    public function isValidateOnly()
+    public function getSession()
     {
-        return $this->validateOnly;
+        return $this->session;
     }
 
     /**
-     * @param bool $validateOnly
+     * @return AdWordsSessionBuilder
      */
-    public function setValidateOnly($validateOnly)
+    public function getSessionBuilder()
     {
-        $this->validateOnly = $validateOnly;
+        return $this->sessionBuilder;
     }
 
     /**
-     * @return \AdWordsUser
+     * @return AdWordsSessionBuilder
      */
-    public function getAdwordUser()
+    private function buildSession()
     {
-        return $this->adwordUser;
+        $this->sessionBuilder = (new AdWordsSessionBuilder())
+            ->fromFile($this->configFile)
+            ->withOAuth2Credential($this->oauthCredentials);
+
+        $this->sessionBuilder->withSoapLogger($this->logger);
+        $this->sessionBuilder->withReportDownloaderLogger($this->logger);
+        $this->sessionBuilder->withBatchJobsUtilLogger($this->logger);
     }
+
+
 }
