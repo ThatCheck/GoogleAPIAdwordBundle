@@ -9,8 +9,8 @@
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
-use Google\AdsApi\AdWords\v201609\cm\CampaignPage;
-use Google\AdsApi\AdWords\v201609\cm\CampaignService;
+use Google\AdsApi\AdWords\v201708\cm\CampaignPage;
+use Google\AdsApi\AdWords\v201708\cm\CampaignService;
 
 class GoogleAPIAdwordCampaignService extends AbstractServiceManagement
 {

@@ -3,7 +3,7 @@
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Request;
 use Google\AdsApi\AdWords\AdWordsSession;
 use Google\AdsApi\AdWords\AdWordsSessionBuilder;
-use Google\AdsApi\AdWords\Reporting\v201609\RequestOptionsFactory;
+use Google\AdsApi\AdWords\Reporting\v201708\RequestOptionsFactory;
 use Google\AdsApi\AdWords\ReportSettingsBuilder;
 use Google\AdsApi\Common\Configuration;
 
