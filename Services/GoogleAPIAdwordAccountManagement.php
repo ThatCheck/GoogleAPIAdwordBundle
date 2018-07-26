@@ -8,8 +8,8 @@
  */
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
-use Google\AdsApi\AdWords\v201710\mcm\ManagedCustomerPage;
-use Google\AdsApi\AdWords\v201710\mcm\ManagedCustomerService;
+use Google\AdsApi\AdWords\v201802\mcm\ManagedCustomerPage;
+use Google\AdsApi\AdWords\v201802\mcm\ManagedCustomerService;
 use Google\AdsApi\Common\AdsSoapClient;
 
 /**
