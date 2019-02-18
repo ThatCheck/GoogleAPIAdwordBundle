@@ -9,8 +9,8 @@
 
 namespace Thatcheck\Bundle\GoogleAPIAdwordBundle\Services;
 
-use Google\AdsApi\AdWords\Reporting\v201802\ReportDefinition;
-use Google\AdsApi\AdWords\Reporting\v201802\ReportDownloader;
+use Google\AdsApi\AdWords\Reporting\v201809\ReportDefinition;
+use Google\AdsApi\AdWords\Reporting\v201809\ReportDownloader;
 use Thatcheck\Bundle\GoogleAPIAdwordBundle\Request\CustomRequestOptionFactory;
 
 /**

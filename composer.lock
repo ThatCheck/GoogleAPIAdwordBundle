@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c130574e78721e9fb9bb8653663f674e",
+    "content-hash": "581eed0287b8d83adac28a4d069fccb3",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -57,12 +57,12 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/google/google-auth-library-php.git",
+                "url": "https://github.com/googleapis/google-auth-library-php.git",
                 "reference": "436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-auth-library-php/zipball/436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0",
                 "reference": "436007a77fd2037f933d3a5c8e4c7e0c9b88a7b0",
                 "shasum": ""
             },
@@ -101,16 +101,16 @@
         },
         {
             "name": "googleads/googleads-php-lib",
-            "version": "35.2.0",
+            "version": "40.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleads/googleads-php-lib.git",
-                "reference": "ef55b92cd10c2ff0ddd1354711c1e1a4092ed239"
+                "reference": "1811a89a66b3aa0f841750380ab04e2bd733803b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleads/googleads-php-lib/zipball/ef55b92cd10c2ff0ddd1354711c1e1a4092ed239",
-                "reference": "ef55b92cd10c2ff0ddd1354711c1e1a4092ed239",
+                "url": "https://api.github.com/repos/googleads/googleads-php-lib/zipball/1811a89a66b3aa0f841750380ab04e2bd733803b",
+                "reference": "1811a89a66b3aa0f841750380ab04e2bd733803b",
                 "shasum": ""
             },
             "require": {
@@ -121,17 +121,17 @@
                 "guzzlehttp/guzzle": "^6.0",
                 "guzzlehttp/psr7": "^1.2",
                 "monolog/monolog": "^1.17.1",
-                "php": ">=5.5.9",
+                "php": ">=5.6",
                 "phpdocumentor/reflection-docblock": "^4.0.0 || ^3.0.3",
                 "symfony/serializer": "^2.8.0 || ^3.0.3 || ^4.0.0"
             },
             "require-dev": {
-                "php": ">=5.5.17",
+                "php": ">=5.6",
                 "phpunit/phpunit": "^4.8.35 || ^5.7",
                 "squizlabs/php_codesniffer": "^2.9 || ^3.2"
             },
             "suggest": {
-                "php-64bit": ">=5.5.9"
+                "php-64bit": ">=5.6"
             },
             "type": "library",
             "autoload": {
@@ -149,9 +149,9 @@
                     "homepage": "https://github.com/googleads/googleads-php-lib/contributors"
                 }
             ],
-            "description": "Google Ads APIs Client Library for PHP (AdWords and DFP)",
+            "description": "Google Ads APIs Client Library for PHP (AdWords and Ad Manager)",
             "homepage": "https://github.com/googleads/googleads-php-lib",
-            "time": "2018-06-07T08:47:53+00:00"
+            "time": "2019-02-13T04:19:55+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
